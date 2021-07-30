@@ -1,18 +1,17 @@
-import { Employee } from './../empl/employee';
+import { Employee } from '../list-emplyee/employee';
 import { HttpErrorResponse } from '@angular/common/http';
-import { EmployeeService } from './../service/employee.service';
+import { EmployeeService } from '../../service/employee.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-newemp',
-  templateUrl: './newemp.component.html',
-  styleUrls: ['./newemp.component.css']
+  templateUrl: './add-emplyee.component.html',
+  styleUrls: ['./add-emplyee.component.css']
 })
-export class NewempComponent implements OnInit {
+export class AddEmplyeeComponent implements OnInit {
 
   public employees: Employee[];
-  employee:Employee;
 
   constructor(private employeeService:EmployeeService) { }
 
@@ -29,9 +28,10 @@ export class NewempComponent implements OnInit {
       }
     );
   }
-  public onAddEmployee(){
-
-    this.employeeService.addEmployees(this.employee).subscribe(
+  public onAddEmployee(addForm: NgForm){
+    console.log("testttt")
+    console.log(addForm.value)
+    this.employeeService.addEmployees(addForm.value).subscribe(
       (response:Employee)=>{
         console.log(response);
         this.getEmployees();
